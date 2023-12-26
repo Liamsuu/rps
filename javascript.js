@@ -44,5 +44,3 @@ function game() {
 }
 
 game();
-
-// the game can not yet handle null
