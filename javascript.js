@@ -13,7 +13,9 @@ function playerSelection() {
 function playRound(playerAnswer, computerAnswer) {
   if (playerAnswer === computerAnswer) {
     console.log("Draw! Try again");
-    return "draw";
+    let player_redo = playerSelection();
+    let computer_redo = computerSelection();
+    playRound(player_redo, computer_redo);
   } else if (playerAnswer === "scissors" && computerAnswer === "rock") {
     console.log("You lose! Rock beats scissors");
     return "lose";
