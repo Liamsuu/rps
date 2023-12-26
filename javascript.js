@@ -37,9 +37,21 @@ function playRound(playerAnswer, computerAnswer) {
 }
 
 function game() {
+  let wins = 0;
   for (let x = 1; x <= 5; x++) {
     console.log("Round " + x);
-    console.log(playRound(playerSelection(), computerSelection()));
+    win_text = playRound(playerSelection(), computerSelection());
+    console.log(win_text);
+    if (win_text.includes("won!")) {
+      wins++;
+    }
+  }
+
+  if (wins >= 3) {
+    console.log(`You won overall with ${wins} wins.`);
+  } else {
+    console.log("YOU LOST OVERALL!");
+    console.log(`The computer won overall with ${5 - wins} wins.`);
   }
 }
 
