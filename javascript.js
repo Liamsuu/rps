@@ -3,11 +3,23 @@ function computerSelection() {
   const computer_choice = choices[Math.floor(Math.random() * choices.length)];
   return computer_choice;
 }
+function correctUserValue(selection) {
+  selection = selection.toLowerCase();
+  if (selection == "rock" || selection == "paper" || selection == "scissors") {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function playerSelection() {
   let choice = prompt("rock, paper, scissors: ");
   choice = choice.toLowerCase();
-  while (choice === null || choice === "") {
+  while (
+    choice === null ||
+    choice === "" ||
+    correctUserValue(choice) == false
+  ) {
     choice = prompt("rock, paper, scissors: ");
   }
 
