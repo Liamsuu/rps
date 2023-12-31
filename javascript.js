@@ -29,10 +29,7 @@ function playerSelection() {
 
 function playRound(playerAnswer, computerAnswer) {
   if (playerAnswer === computerAnswer) {
-    console.log("Draw! Try again");
-    let player_redo = playerSelection();
-    let computer_redo = computerSelection();
-    return playRound(player_redo, computer_redo);
+    return "Draw! Try again.";
   } else if (playerAnswer === "scissors" && computerAnswer === "rock") {
     return "You lose! Rock beats scissors";
   } else if (playerAnswer === "scissors" && computerAnswer === "paper") {
@@ -48,23 +45,66 @@ function playRound(playerAnswer, computerAnswer) {
   }
 }
 
-function game() {
-  let wins = 0;
-  for (let x = 1; x <= 5; x++) {
-    console.log("Round " + x);
-    win_text = playRound(playerSelection(), computerSelection());
-    console.log(win_text);
-    if (win_text.includes("won!")) {
-      wins++;
+//function game() {
+const player_rock = document.querySelector("#rock-selector");
+const player_paper = document.querySelector("#paper-selector");
+const player_scissors = document.querySelector("#scissors-selector");
+let player_wins = 0;
+let comp_wins = 0;
+const player_tracker = document.createElement("div");
+const comp_tracker = document.createElement("div");
+document.body.appendChild(player_tracker);
+document.body.appendChild(comp_tracker);
+
+player_rock.addEventListener("click", () => {
+  let win_text = playRound("rock", computerSelection());
+  if (win_text.includes("won!")) {
+    player_wins++;
+    player_tracker.textContent = `Player wins: ${player_wins}`;
+  } else {
+    comp_wins++;
+    comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+  }
+  displayWinner(player_wins, comp_wins);
+});
+
+player_paper.addEventListener("click", () => {
+  const win_text = playRound("paper", computerSelection());
+  if (win_text.includes("won!")) {
+    player_wins++;
+    player_tracker.textContent = `Player wins: ${player_wins}`;
+  } else {
+    comp_wins++;
+    comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+  }
+  displayWinner(player_wins, comp_wins);
+});
+
+player_scissors.addEventListener("click", () => {
+  const win_text = playRound("scissors", computerSelection());
+  if (win_text.includes("won!")) {
+    player_wins++;
+    player_tracker.textContent = `Player wins: ${player_wins}`;
+  } else {
+    comp_wins++;
+    comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+  }
+  displayWinner(player_wins, comp_wins);
+});
+
+function displayWinner(player, computer) {
+  if (player == 5 || computer == 5) {
+    if (player == 5) {
+      const player_div = document.createElement("div");
+      document.body.appendChild(player_div);
+      player_div.style = "color: blue";
+      player_div.textContent = "THE PLAYER WON";
+    } else if (computer == 5) {
+      const comp_div = document.createElement("div");
+      document.body.appendChild(comp_div);
+      comp_div.style = "color: red";
+      comp_div.textContent = "THE COMPUTER WON";
     }
   }
-
-  if (wins >= 3) {
-    console.log(`You won overall with ${wins} wins.`);
-  } else {
-    console.log("YOU LOST OVERALL!");
-    console.log(`The computer won overall with ${5 - wins} wins.`);
-  }
 }
-
-game();
+//}
