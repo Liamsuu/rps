@@ -46,9 +46,11 @@ function playRound(playerAnswer, computerAnswer) {
 }
 
 //function game() {
+
 const player_rock = document.querySelector("#rock-selector");
 const player_paper = document.querySelector("#paper-selector");
 const player_scissors = document.querySelector("#scissors-selector");
+const reset_game = document.querySelector("#reset-selector");
 let player_wins = 0;
 let comp_wins = 0;
 const player_tracker = document.createElement("div");
@@ -57,39 +59,56 @@ document.body.appendChild(player_tracker);
 document.body.appendChild(comp_tracker);
 
 player_rock.addEventListener("click", () => {
-  let win_text = playRound("rock", computerSelection());
-  if (win_text.includes("won!")) {
-    player_wins++;
-    player_tracker.textContent = `Player wins: ${player_wins}`;
-  } else {
-    comp_wins++;
-    comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+  if (document.getElementById("winnerdiv") === null) {
+    let win_text = playRound("rock", computerSelection());
+    if (win_text.includes("won!")) {
+      player_wins++;
+      player_tracker.textContent = `Player wins: ${player_wins}`;
+    } else {
+      comp_wins++;
+      comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+    }
+    displayWinner(player_wins, comp_wins);
   }
-  displayWinner(player_wins, comp_wins);
 });
 
 player_paper.addEventListener("click", () => {
-  const win_text = playRound("paper", computerSelection());
-  if (win_text.includes("won!")) {
-    player_wins++;
-    player_tracker.textContent = `Player wins: ${player_wins}`;
-  } else {
-    comp_wins++;
-    comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+  if (document.getElementById("winnerdiv") === null) {
+    const win_text = playRound("paper", computerSelection());
+    if (win_text.includes("won!")) {
+      player_wins++;
+      player_tracker.textContent = `Player wins: ${player_wins}`;
+    } else {
+      comp_wins++;
+      comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+    }
+    displayWinner(player_wins, comp_wins);
   }
-  displayWinner(player_wins, comp_wins);
 });
 
 player_scissors.addEventListener("click", () => {
-  const win_text = playRound("scissors", computerSelection());
-  if (win_text.includes("won!")) {
-    player_wins++;
-    player_tracker.textContent = `Player wins: ${player_wins}`;
-  } else {
-    comp_wins++;
-    comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+  if (document.getElementById("winnerdiv") === null) {
+    const win_text = playRound("scissors", computerSelection());
+    if (win_text.includes("won!")) {
+      player_wins++;
+      player_tracker.textContent = `Player wins: ${player_wins}`;
+    } else {
+      comp_wins++;
+      comp_tracker.textContent = `Computer wins: ${comp_wins}`;
+    }
+    displayWinner(player_wins, comp_wins);
   }
-  displayWinner(player_wins, comp_wins);
+});
+
+reset_game.addEventListener("click", () => {
+  player_wins = 0;
+  comp_wins = 0;
+  player_tracker.textContent = "";
+  comp_tracker.textContent = "";
+  if (document.getElementById("winnerdiv") !== null) {
+    const winner = document.getElementById("winnerdiv");
+    winner.remove();
+  }
 });
 
 function displayWinner(player, computer) {
@@ -97,14 +116,19 @@ function displayWinner(player, computer) {
     if (player == 5) {
       const player_div = document.createElement("div");
       document.body.appendChild(player_div);
+      player_div.id = "winnerdiv";
       player_div.style = "color: blue";
       player_div.textContent = "THE PLAYER WON";
     } else if (computer == 5) {
       const comp_div = document.createElement("div");
       document.body.appendChild(comp_div);
+      comp_div.id = "winnerdiv";
       comp_div.style = "color: red";
       comp_div.textContent = "THE COMPUTER WON";
     }
   }
 }
+//  ADD RESET AND SO THAT COMPUTER/PLAYER WINS ONLY APPEARS ONCE SO SOMEHOW CHECK IF THE DIV
+// IS ALREADY THERE IF IT IS, DONT ADD ANOTHER DIV.
+
 //}
