@@ -45,8 +45,6 @@ function playRound(playerAnswer, computerAnswer) {
   }
 }
 
-//function game() {
-
 const player_rock = document.querySelector("#rock-selector");
 const player_paper = document.querySelector("#paper-selector");
 const player_scissors = document.querySelector("#scissors-selector");
@@ -128,7 +126,3 @@ function displayWinner(player, computer) {
     }
   }
 }
-//  ADD RESET AND SO THAT COMPUTER/PLAYER WINS ONLY APPEARS ONCE SO SOMEHOW CHECK IF THE DIV
-// IS ALREADY THERE IF IT IS, DONT ADD ANOTHER DIV.
-
-//}
